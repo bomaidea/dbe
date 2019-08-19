@@ -28,7 +28,7 @@ CREATE TABLE dbe.audit_action
     deleted_by   INT,
     deleted_date DATETIME,
 
-    name         VARCHAR(10) NOT NULL,
+    name         VARCHAR(10) UNIQUE NOT NULL,
 
     PRIMARY KEY (id)
 );
@@ -155,3 +155,10 @@ CREATE TABLE dbe.record_audit (
     FOREIGN KEY (deleted_by) REFERENCES dbe.users (id) ON DELETE NO ACTION ON UPDATE CASCADE
 );
 
+
+
+INSERT INTO dbe.audit_action (created_by, created_date, updated_by, updated_date, name) VALUES (1,NOW(),1,NOW(),'created');
+INSERT INTO dbe.audit_action (created_by, created_date, updated_by, updated_date, name) VALUES (1,NOW(),1,NOW(),'edited');
+INSERT INTO dbe.audit_action (created_by, created_date, updated_by, updated_date, name) VALUES (1,NOW(),1,NOW(),'deleted');
+
+INSERT INTO dbe.users (created_by, created_date, updated_by, updated_date, username, password, salt, firstname, lastname, email) VALUES (1,NOW(),1,NOW(),'db_core','pw','salt','DB','CORE','core@db');
