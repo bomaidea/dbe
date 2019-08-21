@@ -158,7 +158,7 @@ CREATE TABLE dbe.record_audit (
 
 
 INSERT INTO dbe.audit_action (created_by, created_date, updated_by, updated_date, name) VALUES (1,NOW(),1,NOW(),'created');
-INSERT INTO dbe.audit_action (created_by, created_date, updated_by, updated_date, name) VALUES (1,NOW(),1,NOW(),'edited');
+INSERT INTO dbe.audit_action (created_by, created_date, updated_by, updated_date, name) VALUES (1,NOW(),1,NOW(),'updated');
 INSERT INTO dbe.audit_action (created_by, created_date, updated_by, updated_date, name) VALUES (1,NOW(),1,NOW(),'deleted');
 
 INSERT INTO dbe.users (created_by, created_date, updated_by, updated_date, username, password, salt, firstname, lastname, email) VALUES (1,NOW(),1,NOW(),'db_core','pw','salt','DB','CORE','core@db');
