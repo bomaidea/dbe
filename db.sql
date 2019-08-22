@@ -140,12 +140,12 @@ CREATE TABLE dbe.record_audit (
     deleted_by INT NOT NULL,
     deleted_date INT NOT NULL,
 
-    firstname VARCHAR (64) NOT NULL,
-    lastname VARCHAR(64) NOT NULL,
-    born_date DATE NOT NULL,
-    address VARCHAR(128) NOT NULL,
-    email VARCHAR (128) NOT NULL,
-    phone VARCHAR (30) NOT NULL,
+    audit_firstname VARCHAR (64) NOT NULL,
+    audit_lastname VARCHAR(64) NOT NULL,
+    audit_born_date DATE NOT NULL,
+    audit_address VARCHAR(128) NOT NULL,
+    audit_email VARCHAR (128) NOT NULL,
+    audit_phone VARCHAR (30) NOT NULL,
 
     PRIMARY KEY (id),
     FOREIGN KEY (audit_id) REFERENCES dbe.record (id) ON DELETE NO ACTION ON UPDATE CASCADE,
