@@ -90,7 +90,7 @@ CREATE TABLE dbe.users_audit
     deleted_by      INT,
     deleted_date    DATETIME,
 
-    audit_username  VARCHAR(32) UNIQUE NOT NULL,
+    audit_username  VARCHAR(32)        NOT NULL,
     audit_password  CHAR(64)           NOT NULL,
     audit_salt      CHAR(32)           NOT NULL,
     audit_firstname VARCHAR(64)        NOT NULL,
@@ -140,12 +140,12 @@ CREATE TABLE dbe.record_audit (
     deleted_by INT NOT NULL,
     deleted_date INT NOT NULL,
 
-    firstname VARCHAR (64) NOT NULL,
-    lastname VARCHAR(64) NOT NULL,
-    born_date DATE NOT NULL,
-    address VARCHAR(128) NOT NULL,
-    email VARCHAR (128) NOT NULL,
-    phone VARCHAR (30) NOT NULL,
+    audit_firstname VARCHAR (64) NOT NULL,
+    audit_lastname VARCHAR(64) NOT NULL,
+    audit_born_date DATE NOT NULL,
+    audit_address VARCHAR(128) NOT NULL,
+    audit_email VARCHAR (128) NOT NULL,
+    audit_phone VARCHAR (30) NOT NULL,
 
     PRIMARY KEY (id),
     FOREIGN KEY (audit_id) REFERENCES dbe.record (id) ON DELETE NO ACTION ON UPDATE CASCADE,
@@ -158,7 +158,7 @@ CREATE TABLE dbe.record_audit (
 
 
 INSERT INTO dbe.audit_action (created_by, created_date, updated_by, updated_date, name) VALUES (1,NOW(),1,NOW(),'created');
-INSERT INTO dbe.audit_action (created_by, created_date, updated_by, updated_date, name) VALUES (1,NOW(),1,NOW(),'edited');
+INSERT INTO dbe.audit_action (created_by, created_date, updated_by, updated_date, name) VALUES (1,NOW(),1,NOW(),'updated');
 INSERT INTO dbe.audit_action (created_by, created_date, updated_by, updated_date, name) VALUES (1,NOW(),1,NOW(),'deleted');
 
 INSERT INTO dbe.users (created_by, created_date, updated_by, updated_date, username, password, salt, firstname, lastname, email) VALUES (1,NOW(),1,NOW(),'db_core','pw','salt','DB','CORE','core@db');
