@@ -90,7 +90,7 @@ CREATE TABLE dbe.users_audit
     deleted_by      INT,
     deleted_date    DATETIME,
 
-    audit_username  VARCHAR(32) UNIQUE NOT NULL,
+    audit_username  VARCHAR(32)        NOT NULL,
     audit_password  CHAR(64)           NOT NULL,
     audit_salt      CHAR(32)           NOT NULL,
     audit_firstname VARCHAR(64)        NOT NULL,
