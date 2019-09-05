@@ -33,6 +33,9 @@ CREATE TABLE dbe.audit_action
     PRIMARY KEY (id)
 );
 
+# -----------------------------------------------
+# -----------------------------------------------
+
 CREATE TABLE dbe.audit_action_audit
 (
     id           INT AUTO_INCREMENT,
@@ -52,6 +55,9 @@ CREATE TABLE dbe.audit_action_audit
     FOREIGN KEY (audit_id) REFERENCES dbe.audit_action (id) ON DELETE NO ACTION ON UPDATE CASCADE,
     FOREIGN KEY (action) REFERENCES dbe.audit_action (id) ON DELETE NO ACTION ON UPDATE CASCADE
 );
+
+# -----------------------------------------------
+# -----------------------------------------------
 
 CREATE TABLE dbe.users
 (
@@ -76,6 +82,9 @@ CREATE TABLE dbe.users
     FOREIGN KEY (updated_by) REFERENCES dbe.users (id) ON DELETE NO ACTION ON UPDATE CASCADE,
     FOREIGN KEY (deleted_by) REFERENCES dbe.users (id) ON DELETE NO ACTION ON UPDATE CASCADE
 );
+
+# -----------------------------------------------
+# -----------------------------------------------
 
 CREATE TABLE dbe.users_audit
 (
@@ -105,6 +114,9 @@ CREATE TABLE dbe.users_audit
     FOREIGN KEY (deleted_by) REFERENCES dbe.users (id) ON DELETE NO ACTION ON UPDATE CASCADE
 );
 
+# -----------------------------------------------
+# -----------------------------------------------
+
 CREATE TABLE dbe.record (
     id INT AUTO_INCREMENT,
     
@@ -127,6 +139,9 @@ CREATE TABLE dbe.record (
     FOREIGN KEY (updated_by) REFERENCES dbe.users (id) ON DELETE NO ACTION ON UPDATE CASCADE,
     FOREIGN KEY (deleted_by) REFERENCES dbe.users (id) ON DELETE NO ACTION ON UPDATE CASCADE
 );
+
+# -----------------------------------------------
+# -----------------------------------------------
 
 CREATE TABLE dbe.record_audit (
     id INT AUTO_INCREMENT,
@@ -156,6 +171,11 @@ CREATE TABLE dbe.record_audit (
 );
 
 
+# -----------------------------------------------
+#
+# INSERT SYSTEM DATA
+#
+# -----------------------------------------------
 
 INSERT INTO dbe.audit_action (created_by, created_date, updated_by, updated_date, name) VALUES (1,NOW(),1,NOW(),'created');
 INSERT INTO dbe.audit_action (created_by, created_date, updated_by, updated_date, name) VALUES (1,NOW(),1,NOW(),'updated');
