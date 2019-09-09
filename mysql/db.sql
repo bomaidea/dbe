@@ -117,6 +117,190 @@ CREATE TABLE dbe.users_audit
 # -----------------------------------------------
 # -----------------------------------------------
 
+CREATE TABLE dbe.permission
+(
+    id           INT AUTO_INCREMENT,
+
+    created_by   INT         NOT NULL,
+    created_date DATETIME    NOT NULL,
+    updated_by   INT         NOT NULL,
+    updated_date DATETIME    NOT NULL,
+    deleted_by   INT,
+    deleted_date DATETIME,
+
+    name         VARCHAR(10) UNIQUE NOT NULL,
+
+    PRIMARY KEY (id)
+);
+
+# -----------------------------------------------
+# -----------------------------------------------
+
+CREATE TABLE dbe.permission_audit
+(
+    id           INT AUTO_INCREMENT,
+    audit_id     INT         NOT NULL,
+    action       INT         NOT NULL,
+
+    created_by   INT         NOT NULL,
+    created_date DATETIME    NOT NULL,
+    updated_by   INT         NOT NULL,
+    updated_date DATETIME    NOT NULL,
+    deleted_by   INT,
+    deleted_date DATETIME,
+
+    audit_name   VARCHAR(10) NOT NULL,
+
+    PRIMARY KEY (id),
+    FOREIGN KEY (audit_id) REFERENCES dbe.permission (id) ON DELETE NO ACTION ON UPDATE CASCADE,
+    FOREIGN KEY (action) REFERENCES dbe.audit_action (id) ON DELETE NO ACTION ON UPDATE CASCADE
+);
+
+# -----------------------------------------------
+# -----------------------------------------------
+
+CREATE TABLE dbe.groups
+(
+    id           INT AUTO_INCREMENT,
+
+    created_by   INT         NOT NULL,
+    created_date DATETIME    NOT NULL,
+    updated_by   INT         NOT NULL,
+    updated_date DATETIME    NOT NULL,
+    deleted_by   INT,
+    deleted_date DATETIME,
+
+    name         VARCHAR(10) UNIQUE NOT NULL,
+	parent_group INT,
+
+    PRIMARY KEY (id),
+	FOREIGN KEY (parent_group) REFERENCES dbe.groups (id) ON DELETE NO ACTION ON UPDATE CASCADE
+);
+
+# -----------------------------------------------
+# -----------------------------------------------
+
+CREATE TABLE dbe.groups_audit
+(
+    id           INT AUTO_INCREMENT,
+    audit_id     INT         NOT NULL,
+    action       INT         NOT NULL,
+
+    created_by   INT         NOT NULL,
+    created_date DATETIME    NOT NULL,
+    updated_by   INT         NOT NULL,
+    updated_date DATETIME    NOT NULL,
+    deleted_by   INT,
+    deleted_date DATETIME,
+
+    audit_name   VARCHAR(10) NOT NULL,
+	audit_parent_group INT,
+
+    PRIMARY KEY (id),
+	FOREIGN KEY (audit_parent_group) REFERENCES dbe.groups (id) ON DELETE NO ACTION ON UPDATE CASCADE,
+    FOREIGN KEY (audit_id) REFERENCES dbe.groups (id) ON DELETE NO ACTION ON UPDATE CASCADE,
+    FOREIGN KEY (action) REFERENCES dbe.audit_action (id) ON DELETE NO ACTION ON UPDATE CASCADE
+);
+
+# -----------------------------------------------
+# -----------------------------------------------
+
+CREATE TABLE dbe.groups_permission
+(
+    id           INT AUTO_INCREMENT,
+
+    created_by   INT         NOT NULL,
+    created_date DATETIME    NOT NULL,
+    updated_by   INT         NOT NULL,
+    updated_date DATETIME    NOT NULL,
+    deleted_by   INT,
+    deleted_date DATETIME,
+
+    permission   INT NOT NULL,
+	groups 	     INT NOT NULL,
+
+    PRIMARY KEY (id),
+	FOREIGN KEY (permission) REFERENCES dbe.permission (id) ON DELETE NO ACTION ON UPDATE CASCADE,
+	FOREIGN KEY (groups) REFERENCES dbe.groups (id) ON DELETE NO ACTION ON UPDATE CASCADE
+);
+
+# -----------------------------------------------
+# -----------------------------------------------
+
+CREATE TABLE dbe.groups_permission_audit
+(
+    id           INT AUTO_INCREMENT,
+    audit_id     INT         NOT NULL,
+    action       INT         NOT NULL,
+
+    created_by   INT         NOT NULL,
+    created_date DATETIME    NOT NULL,
+    updated_by   INT         NOT NULL,
+    updated_date DATETIME    NOT NULL,
+    deleted_by   INT,
+    deleted_date DATETIME,
+
+    audit_permission INT NOT NULL,
+	audit_groups 	 INT NOT NULL,
+
+    PRIMARY KEY (id),
+	FOREIGN KEY (audit_permission) REFERENCES dbe.permission (id) ON DELETE NO ACTION ON UPDATE CASCADE,
+	FOREIGN KEY (audit_groups) REFERENCES dbe.groups (id) ON DELETE NO ACTION ON UPDATE CASCADE,
+    FOREIGN KEY (audit_id) REFERENCES dbe.groups_permission (id) ON DELETE NO ACTION ON UPDATE CASCADE,
+    FOREIGN KEY (action) REFERENCES dbe.audit_action (id) ON DELETE NO ACTION ON UPDATE CASCADE
+);
+
+# -----------------------------------------------
+# -----------------------------------------------
+
+CREATE TABLE dbe.users_groups
+(
+    id           INT AUTO_INCREMENT,
+
+    created_by   INT         NOT NULL,
+    created_date DATETIME    NOT NULL,
+    updated_by   INT         NOT NULL,
+    updated_date DATETIME    NOT NULL,
+    deleted_by   INT,
+    deleted_date DATETIME,
+
+    users   INT NOT NULL,
+	groups 	     INT NOT NULL,
+
+    PRIMARY KEY (id),
+	FOREIGN KEY (users) REFERENCES dbe.users (id) ON DELETE NO ACTION ON UPDATE CASCADE,
+	FOREIGN KEY (groups) REFERENCES dbe.groups (id) ON DELETE NO ACTION ON UPDATE CASCADE
+);
+
+# -----------------------------------------------
+# -----------------------------------------------
+
+CREATE TABLE dbe.users_groups_audit
+(
+    id           INT AUTO_INCREMENT,
+    audit_id     INT         NOT NULL,
+    action       INT         NOT NULL,
+
+    created_by   INT         NOT NULL,
+    created_date DATETIME    NOT NULL,
+    updated_by   INT         NOT NULL,
+    updated_date DATETIME    NOT NULL,
+    deleted_by   INT,
+    deleted_date DATETIME,
+
+    audit_users  INT NOT NULL,
+	audit_groups INT NOT NULL,
+
+    PRIMARY KEY (id),
+	FOREIGN KEY (audit_users) REFERENCES dbe.users (id) ON DELETE NO ACTION ON UPDATE CASCADE,
+	FOREIGN KEY (audit_groups) REFERENCES dbe.groups (id) ON DELETE NO ACTION ON UPDATE CASCADE,
+    FOREIGN KEY (audit_id) REFERENCES dbe.groups (id) ON DELETE NO ACTION ON UPDATE CASCADE,
+    FOREIGN KEY (action) REFERENCES dbe.audit_action (id) ON DELETE NO ACTION ON UPDATE CASCADE
+);
+
+# -----------------------------------------------
+# -----------------------------------------------
+
 CREATE TABLE dbe.record (
     id INT AUTO_INCREMENT,
     
@@ -182,3 +366,5 @@ INSERT INTO dbe.audit_action (created_by, created_date, updated_by, updated_date
 INSERT INTO dbe.audit_action (created_by, created_date, updated_by, updated_date, name) VALUES (1,NOW(),1,NOW(),'deleted');
 
 INSERT INTO dbe.users (created_by, created_date, updated_by, updated_date, username, password, salt, firstname, lastname, email) VALUES (1,NOW(),1,NOW(),'db_core','pw','salt','DB','CORE','core@db');
+
+INSERT INTO dbe.groups(created_by, created_date, updated_by, updated_date, name) VALUES (1, NOW(), 1, NOW(), 'db_core'), (1, NOW(), 1, NOW(), 'admins');
