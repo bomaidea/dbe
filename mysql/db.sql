@@ -101,8 +101,8 @@ CREATE TABLE dbe.permission
   deleted_by   INT,
   deleted_date DATETIME,
 
-  name         VARCHAR(64) NOT NULL,
-  string       VARCHAR(32) UNIQUE NOT NULL ,
+  name         VARCHAR(64)        NOT NULL,
+  string       VARCHAR(32) UNIQUE NOT NULL,
   description  VARCHAR(256),
 
   PRIMARY KEY (id)
@@ -213,19 +213,19 @@ CREATE TABLE dbe.groups_permission
 
 CREATE TABLE dbe.groups_permission_audit
 (
-  id                 INT AUTO_INCREMENT,
-  action             INT      NOT NULL,
+  id                     INT AUTO_INCREMENT,
+  action                 INT      NOT NULL,
 
-  audit_id           INT      NOT NULL,
-  audit_created_by   INT      NOT NULL,
-  audit_created_date DATETIME NOT NULL,
-  audit_updated_by   INT      NOT NULL,
-  audit_updated_date DATETIME NOT NULL,
-  audit_deleted_by   INT,
-  audit_deleted_date DATETIME,
+  audit_id               INT      NOT NULL,
+  audit_created_by       INT      NOT NULL,
+  audit_created_date     DATETIME NOT NULL,
+  audit_updated_by       INT      NOT NULL,
+  audit_updated_date     DATETIME NOT NULL,
+  audit_deleted_by       INT,
+  audit_deleted_date     DATETIME,
 
-  audit_permission   INT      NOT NULL,
-  audit_groups       INT      NOT NULL,
+  audit_permission       INT      NOT NULL,
+  audit_permission_group INT      NOT NULL,
 
   PRIMARY KEY (id),
   FOREIGN KEY (action) REFERENCES dbe.audit_action (id)
@@ -276,7 +276,7 @@ CREATE TABLE dbe.users_groups_audit
   audit_deleted_date DATETIME,
 
   audit_users        INT      NOT NULL,
-  audit_groups       INT      NOT NULL,
+  audit_user_group   INT      NOT NULL,
 
   PRIMARY KEY (id),
   FOREIGN KEY (action) REFERENCES dbe.audit_action (id)
