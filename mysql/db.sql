@@ -144,7 +144,7 @@ CREATE TABLE dbe.groups
   deleted_by   INT,
   deleted_date DATETIME,
 
-  name         VARCHAR(10) UNIQUE NOT NULL,
+  name         VARCHAR(64) UNIQUE NOT NULL,
   parent_group INT,
 
   PRIMARY KEY (id),
@@ -169,7 +169,7 @@ CREATE TABLE dbe.groups_audit
   audit_deleted_by   INT,
   audit_deleted_date DATETIME,
 
-  audit_name         VARCHAR(10) NOT NULL,
+  audit_name         VARCHAR(64) NOT NULL,
   audit_parent_group INT,
 
   PRIMARY KEY (id),
