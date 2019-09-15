@@ -101,7 +101,7 @@ BEGIN
 
 	SELECT id 
 		FROM dbe.audit_action 
-		WHERE audit_action.name='delete' 
+		WHERE audit_action.name='deleted'
 		INTO v_action;
 
 	INSERT INTO dbe.users_audit (
