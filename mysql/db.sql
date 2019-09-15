@@ -82,7 +82,7 @@ CREATE TABLE dbe.users_audit
   audit_email        VARCHAR(128) NOT NULL,
 
   PRIMARY KEY (id),
-  FOREIGN KEY (audit_id) REFERENCES dbe.users (id)
+  FOREIGN KEY (action) REFERENCES dbe.audit_action (id)
     ON DELETE NO ACTION
     ON UPDATE CASCADE
 );
