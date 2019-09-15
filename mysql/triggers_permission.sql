@@ -21,7 +21,9 @@ BEGIN
 		audit_updated_date,
 		audit_deleted_by,
 		audit_deleted_date,
-		audit_name
+		audit_name,
+    audit_string,
+    audit_description
 	) VALUES (
 		v_action,
 		NEW.id, 
@@ -31,7 +33,9 @@ BEGIN
 		NEW.updated_date, 
 		NEW.deleted_by, 
 		NEW.deleted_date, 
-		NEW.name
+		NEW.name,
+    NEW.string,
+    NEW.description
 	);
 END; //
 
@@ -57,7 +61,9 @@ BEGIN
 		audit_updated_date,
 		audit_deleted_by,
 		audit_deleted_date,
-		audit_name
+		audit_name,
+    audit_string,
+    audit_description
 	) VALUES (
 		v_action,
 		NEW.id,
@@ -67,7 +73,9 @@ BEGIN
 		NEW.updated_date,
 		NEW.deleted_by,
 		NEW.deleted_date,
-		NEW.name
+		NEW.name,
+    NEW.string,
+    NEW.description
 	);
 END; //
 
@@ -93,7 +101,9 @@ BEGIN
 		audit_updated_date,
 		audit_deleted_by,
 		audit_deleted_date,
-		audit_name
+		audit_name,
+    audit_string,
+    audit_description
 	) VALUES (
 		v_action,
 		OLD.id,
@@ -103,6 +113,8 @@ BEGIN
 		OLD.updated_date,
 		OLD.deleted_by,
 		OLD.deleted_date,
-		OLD.name
+		OLD.name,
+    OLD.string,
+    OLD.description
 	);
 END; //
