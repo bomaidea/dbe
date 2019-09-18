@@ -33,11 +33,11 @@ CREATE TABLE dbe.users
   id           INT AUTO_INCREMENT,
 
   created_by   INT                 NOT NULL,
-  created_date DATETIME            NOT NULL,
+  created_date TIMESTAMP           NOT NULL,
   updated_by   INT                 NOT NULL,
-  updated_date DATETIME            NOT NULL,
+  updated_date TIMESTAMP           NOT NULL,
   deleted_by   INT,
-  deleted_date DATETIME,
+  deleted_date TIMESTAMP,
 
   username     VARCHAR(32) UNIQUE  NOT NULL,
   password     CHAR(64)            NOT NULL,
@@ -68,11 +68,11 @@ CREATE TABLE dbe.users_audit
 
   audit_id           INT          NOT NULL,
   audit_created_by   INT          NOT NULL,
-  audit_created_date DATETIME     NOT NULL,
+  audit_created_date TIMESTAMP    NOT NULL,
   audit_updated_by   INT          NOT NULL,
-  audit_updated_date DATETIME     NOT NULL,
+  audit_updated_date TIMESTAMP    NOT NULL,
   audit_deleted_by   INT,
-  audit_deleted_date DATETIME,
+  audit_deleted_date TIMESTAMP,
 
   audit_username     VARCHAR(32)  NOT NULL,
   audit_password     CHAR(64)     NOT NULL,
@@ -95,11 +95,11 @@ CREATE TABLE dbe.permission
   id           INT AUTO_INCREMENT,
 
   created_by   INT                NOT NULL,
-  created_date DATETIME           NOT NULL,
+  created_date TIMESTAMP          NOT NULL,
   updated_by   INT                NOT NULL,
-  updated_date DATETIME           NOT NULL,
+  updated_date TIMESTAMP          NOT NULL,
   deleted_by   INT,
-  deleted_date DATETIME,
+  deleted_date TIMESTAMP,
 
   name         VARCHAR(64)        NOT NULL,
   string       VARCHAR(32) UNIQUE NOT NULL,
@@ -118,11 +118,11 @@ CREATE TABLE dbe.permission_audit
 
   audit_id           INT         NOT NULL,
   audit_created_by   INT         NOT NULL,
-  audit_created_date DATETIME    NOT NULL,
+  audit_created_date TIMESTAMP   NOT NULL,
   audit_updated_by   INT         NOT NULL,
-  audit_updated_date DATETIME    NOT NULL,
+  audit_updated_date TIMESTAMP   NOT NULL,
   audit_deleted_by   INT,
-  audit_deleted_date DATETIME,
+  audit_deleted_date TIMESTAMP,
 
   audit_name         VARCHAR(64) NOT NULL,
   audit_string       VARCHAR(32) NOT NULL,
@@ -142,11 +142,11 @@ CREATE TABLE dbe.groups
   id           INT AUTO_INCREMENT,
 
   created_by   INT                NOT NULL,
-  created_date DATETIME           NOT NULL,
+  created_date TIMESTAMP          NOT NULL,
   updated_by   INT                NOT NULL,
-  updated_date DATETIME           NOT NULL,
+  updated_date TIMESTAMP          NOT NULL,
   deleted_by   INT,
-  deleted_date DATETIME,
+  deleted_date TIMESTAMP,
 
   name         VARCHAR(64) UNIQUE NOT NULL,
   parent_group INT,
@@ -167,11 +167,11 @@ CREATE TABLE dbe.groups_audit
 
   audit_id           INT         NOT NULL,
   audit_created_by   INT         NOT NULL,
-  audit_created_date DATETIME    NOT NULL,
+  audit_created_date TIMESTAMP   NOT NULL,
   audit_updated_by   INT         NOT NULL,
-  audit_updated_date DATETIME    NOT NULL,
+  audit_updated_date TIMESTAMP   NOT NULL,
   audit_deleted_by   INT,
-  audit_deleted_date DATETIME,
+  audit_deleted_date TIMESTAMP,
 
   audit_name         VARCHAR(64) NOT NULL,
   audit_parent_group INT,
@@ -189,15 +189,15 @@ CREATE TABLE dbe.groups_permission
 (
   id               INT AUTO_INCREMENT,
 
-  created_by       INT      NOT NULL,
-  created_date     DATETIME NOT NULL,
-  updated_by       INT      NOT NULL,
-  updated_date     DATETIME NOT NULL,
+  created_by       INT       NOT NULL,
+  created_date     TIMESTAMP NOT NULL,
+  updated_by       INT       NOT NULL,
+  updated_date     TIMESTAMP NOT NULL,
   deleted_by       INT,
-  deleted_date     DATETIME,
+  deleted_date     TIMESTAMP,
 
-  permission       INT      NOT NULL,
-  permission_group INT      NOT NULL,
+  permission       INT       NOT NULL,
+  permission_group INT       NOT NULL,
 
   PRIMARY KEY (id),
   FOREIGN KEY (permission) REFERENCES dbe.permission (id)
@@ -214,18 +214,18 @@ CREATE TABLE dbe.groups_permission
 CREATE TABLE dbe.groups_permission_audit
 (
   id                     INT AUTO_INCREMENT,
-  action                 INT      NOT NULL,
+  action                 INT       NOT NULL,
 
-  audit_id               INT      NOT NULL,
-  audit_created_by       INT      NOT NULL,
-  audit_created_date     DATETIME NOT NULL,
-  audit_updated_by       INT      NOT NULL,
-  audit_updated_date     DATETIME NOT NULL,
+  audit_id               INT       NOT NULL,
+  audit_created_by       INT       NOT NULL,
+  audit_created_date     TIMESTAMP NOT NULL,
+  audit_updated_by       INT       NOT NULL,
+  audit_updated_date     TIMESTAMP NOT NULL,
   audit_deleted_by       INT,
-  audit_deleted_date     DATETIME,
+  audit_deleted_date     TIMESTAMP,
 
-  audit_permission       INT      NOT NULL,
-  audit_permission_group INT      NOT NULL,
+  audit_permission       INT       NOT NULL,
+  audit_permission_group INT       NOT NULL,
 
   PRIMARY KEY (id),
   FOREIGN KEY (action) REFERENCES dbe.audit_action (id)
@@ -240,15 +240,15 @@ CREATE TABLE dbe.users_groups
 (
   id           INT AUTO_INCREMENT,
 
-  created_by   INT      NOT NULL,
-  created_date DATETIME NOT NULL,
-  updated_by   INT      NOT NULL,
-  updated_date DATETIME NOT NULL,
+  created_by   INT       NOT NULL,
+  created_date TIMESTAMP NOT NULL,
+  updated_by   INT       NOT NULL,
+  updated_date TIMESTAMP NOT NULL,
   deleted_by   INT,
-  deleted_date DATETIME,
+  deleted_date TIMESTAMP,
 
-  users        INT      NOT NULL,
-  user_group   INT      NOT NULL,
+  users        INT       NOT NULL,
+  user_group   INT       NOT NULL,
 
   PRIMARY KEY (id),
   FOREIGN KEY (users) REFERENCES dbe.users (id)
@@ -265,18 +265,18 @@ CREATE TABLE dbe.users_groups
 CREATE TABLE dbe.users_groups_audit
 (
   id                 INT AUTO_INCREMENT,
-  action             INT      NOT NULL,
+  action             INT       NOT NULL,
 
-  audit_id           INT      NOT NULL,
-  audit_created_by   INT      NOT NULL,
-  audit_created_date DATETIME NOT NULL,
-  audit_updated_by   INT      NOT NULL,
-  audit_updated_date DATETIME NOT NULL,
+  audit_id           INT       NOT NULL,
+  audit_created_by   INT       NOT NULL,
+  audit_created_date TIMESTAMP NOT NULL,
+  audit_updated_by   INT       NOT NULL,
+  audit_updated_date TIMESTAMP NOT NULL,
   audit_deleted_by   INT,
-  audit_deleted_date DATETIME,
+  audit_deleted_date TIMESTAMP,
 
-  audit_users        INT      NOT NULL,
-  audit_user_group   INT      NOT NULL,
+  audit_users        INT       NOT NULL,
+  audit_user_group   INT       NOT NULL,
 
   PRIMARY KEY (id),
   FOREIGN KEY (action) REFERENCES dbe.audit_action (id)
@@ -291,11 +291,11 @@ CREATE TABLE dbe.record (
   id           INT AUTO_INCREMENT,
 
   created_by   INT          NOT NULL,
-  created_date DATETIME     NOT NULL,
+  created_date TIMESTAMP    NOT NULL,
   updated_by   INT          NOT NULL,
-  updated_date DATETIME     NOT NULL,
+  updated_date TIMESTAMP    NOT NULL,
   deleted_by   INT,
-  deleted_date DATETIME,
+  deleted_date TIMESTAMP,
 
   firstname    VARCHAR(64)  NOT NULL,
   lastname     VARCHAR(64)  NOT NULL,
@@ -325,9 +325,9 @@ CREATE TABLE dbe.record_audit (
 
   audit_id           INT          NOT NULL,
   audit_created_by   INT          NOT NULL,
-  audit_created_date DATETIME     NOT NULL,
+  audit_created_date TIMESTAMP    NOT NULL,
   audit_updated_by   INT          NOT NULL,
-  audit_updated_date DATETIME     NOT NULL,
+  audit_updated_date TIMESTAMP    NOT NULL,
   audit_deleted_by   INT          NOT NULL,
   audit_deleted_date INT          NOT NULL,
 
