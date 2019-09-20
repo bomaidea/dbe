@@ -328,8 +328,8 @@ CREATE TABLE dbe.record_audit (
   audit_created_date TIMESTAMP    NOT NULL,
   audit_updated_by   INT          NOT NULL,
   audit_updated_date TIMESTAMP    NOT NULL,
-  audit_deleted_by   INT          NOT NULL,
-  audit_deleted_date INT          NOT NULL,
+  audit_deleted_by   INT          ,
+  audit_deleted_date INT          ,
 
   audit_firstname    VARCHAR(64)  NOT NULL,
   audit_lastname     VARCHAR(64)  NOT NULL,
