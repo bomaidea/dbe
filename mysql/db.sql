@@ -1,14 +1,14 @@
 # Author: giuliobosco
 # Version: 0.1.1 (2019-08-19 - 2019-09-15)
 
-
+SET sql_mode = '';
 # -----------------------------------------------
 #
 # CREATE DATABASE
 #
 # -----------------------------------------------
 
-CREATE DATABASE dbe;
+CREATE DATABASE `dbee`;
 
 # -----------------------------------------------
 #
@@ -16,44 +16,43 @@ CREATE DATABASE dbe;
 #
 # -----------------------------------------------
 
-CREATE TABLE dbe.audit_action
+CREATE TABLE `dbee`.`audit_action`
 (
-  id   INT AUTO_INCREMENT,
+  `id`   INT AUTO_INCREMENT,
 
-  name VARCHAR(10) UNIQUE NOT NULL,
+  `name` VARCHAR(10) UNIQUE NOT NULL,
 
-  PRIMARY KEY (id)
+  PRIMARY KEY (`id`)
 );
 
 # -----------------------------------------------
 # -----------------------------------------------
 
-CREATE TABLE dbe.users
-(
-  id           INT AUTO_INCREMENT,
+CREATE TABLE `dbee`.`user` (
+  `id`           INT AUTO_INCREMENT,
 
-  created_by   INT                 NOT NULL,
-  created_date TIMESTAMP           NOT NULL,
-  updated_by   INT                 NOT NULL,
-  updated_date TIMESTAMP           NOT NULL,
-  deleted_by   INT,
-  deleted_date TIMESTAMP,
+  `created_by`   INT                 NOT NULL,
+  `created_date` TIMESTAMP           NOT NULL,
+  `updated_by`   INT                 NOT NULL,
+  `updated_date` TIMESTAMP           NOT NULL,
+  `deleted_by`   INT,
+  `deleted_date` TIMESTAMP,
 
-  username     VARCHAR(32) UNIQUE  NOT NULL,
-  password     CHAR(64)            NOT NULL,
-  salt         CHAR(32)            NOT NULL,
-  firstname    VARCHAR(64)         NOT NULL,
-  lastname     VARCHAR(64)         NOT NULL,
-  email        VARCHAR(128) UNIQUE NOT NULL,
+  `username`     VARCHAR(32) UNIQUE  NOT NULL,
+  `password`     CHAR(64)            NOT NULL,
+  `salt`         CHAR(32)            NOT NULL,
+  `firstname`    VARCHAR(64)         NOT NULL,
+  `lastname`     VARCHAR(64)         NOT NULL,
+  `email`        VARCHAR(128) UNIQUE NOT NULL,
 
-  PRIMARY KEY (id),
-  FOREIGN KEY (created_by) REFERENCES dbe.users (id)
+  PRIMARY KEY (`id`),
+  FOREIGN KEY (`created_by`) REFERENCES `dbee`.`user` (`id`)
     ON DELETE NO ACTION
     ON UPDATE CASCADE,
-  FOREIGN KEY (updated_by) REFERENCES dbe.users (id)
+  FOREIGN KEY (`updated_by`) REFERENCES `dbee`.`user` (`id`)
     ON DELETE NO ACTION
     ON UPDATE CASCADE,
-  FOREIGN KEY (deleted_by) REFERENCES dbe.users (id)
+  FOREIGN KEY (`deleted_by`) REFERENCES `dbee`.`user` (`id`)
     ON DELETE NO ACTION
     ON UPDATE CASCADE
 );
@@ -61,28 +60,28 @@ CREATE TABLE dbe.users
 # -----------------------------------------------
 # -----------------------------------------------
 
-CREATE TABLE dbe.users_audit
+CREATE TABLE `dbee`.`user_audit`
 (
-  id                 INT AUTO_INCREMENT,
-  action             INT          NOT NULL,
+  `id`                 INT AUTO_INCREMENT,
+  `action`             INT          NOT NULL,
 
-  audit_id           INT          NOT NULL,
-  audit_created_by   INT          NOT NULL,
-  audit_created_date TIMESTAMP    NOT NULL,
-  audit_updated_by   INT          NOT NULL,
-  audit_updated_date TIMESTAMP    NOT NULL,
-  audit_deleted_by   INT,
-  audit_deleted_date TIMESTAMP,
+  `audit_id`           INT          NOT NULL,
+  `audit_created_by`   INT          NOT NULL,
+  `audit_created_date` TIMESTAMP    NOT NULL,
+  `audit_updated_by`   INT          NOT NULL,
+  `audit_updated_date` TIMESTAMP    NOT NULL,
+  `audit_deleted_by`   INT,
+  `audit_deleted_date` TIMESTAMP,
 
-  audit_username     VARCHAR(32)  NOT NULL,
-  audit_password     CHAR(64)     NOT NULL,
-  audit_salt         CHAR(32)     NOT NULL,
-  audit_firstname    VARCHAR(64)  NOT NULL,
-  audit_lastname     VARCHAR(64)  NOT NULL,
-  audit_email        VARCHAR(128) NOT NULL,
+  `audit_username`     VARCHAR(32)  NOT NULL,
+  `audit_password`     CHAR(64)     NOT NULL,
+  `audit_salt`         CHAR(32)     NOT NULL,
+  `audit_firstname`    VARCHAR(64)  NOT NULL,
+  `audit_lastname`     VARCHAR(64)  NOT NULL,
+  `audit_email`        VARCHAR(128) NOT NULL,
 
-  PRIMARY KEY (id),
-  FOREIGN KEY (action) REFERENCES dbe.audit_action (id)
+  PRIMARY KEY (`id`),
+  FOREIGN KEY (action) REFERENCES `dbee`.`audit_action` (`id`)
     ON DELETE NO ACTION
     ON UPDATE CASCADE
 );
@@ -90,46 +89,46 @@ CREATE TABLE dbe.users_audit
 # -----------------------------------------------
 # -----------------------------------------------
 
-CREATE TABLE dbe.permission
+CREATE TABLE `dbee`.`permission`
 (
-  id           INT AUTO_INCREMENT,
+  `id`           INT AUTO_INCREMENT,
 
-  created_by   INT                NOT NULL,
-  created_date TIMESTAMP          NOT NULL,
-  updated_by   INT                NOT NULL,
-  updated_date TIMESTAMP          NOT NULL,
-  deleted_by   INT,
-  deleted_date TIMESTAMP,
+  `created_by`   INT                NOT NULL,
+  `created_date` TIMESTAMP          NOT NULL,
+  `updated_by`   INT                NOT NULL,
+  `updated_date` TIMESTAMP          NOT NULL,
+  `deleted_by`   INT,
+  `deleted_date` TIMESTAMP,
 
-  name         VARCHAR(64)        NOT NULL,
-  string       VARCHAR(32) UNIQUE NOT NULL,
-  description  VARCHAR(256),
+  `name`         VARCHAR(64)        NOT NULL,
+  `string`       VARCHAR(32) UNIQUE NOT NULL,
+  `description`  VARCHAR(256),
 
-  PRIMARY KEY (id)
+  PRIMARY KEY (`id`)
 );
 
 # -----------------------------------------------
 # -----------------------------------------------
 
-CREATE TABLE dbe.permission_audit
+CREATE TABLE `dbee`.`permission_audit`
 (
-  id                 INT AUTO_INCREMENT,
-  action             INT         NOT NULL,
+  `id`                 INT AUTO_INCREMENT,
+  `action`             INT         NOT NULL,
 
-  audit_id           INT         NOT NULL,
-  audit_created_by   INT         NOT NULL,
-  audit_created_date TIMESTAMP   NOT NULL,
-  audit_updated_by   INT         NOT NULL,
-  audit_updated_date TIMESTAMP   NOT NULL,
-  audit_deleted_by   INT,
-  audit_deleted_date TIMESTAMP,
+  `audit_id`           INT         NOT NULL,
+  `audit_created_by`   INT         NOT NULL,
+  `audit_created_date` TIMESTAMP   NOT NULL,
+  `audit_updated_by`   INT         NOT NULL,
+  `audit_updated_date` TIMESTAMP   NOT NULL,
+  `audit_deleted_by`   INT,
+  `audit_deleted_date` TIMESTAMP,
 
-  audit_name         VARCHAR(64) NOT NULL,
-  audit_string       VARCHAR(32) NOT NULL,
-  audit_description  VARCHAR(256),
+  `audit_name`        VARCHAR(64) NOT NULL,
+  `audit_string`       VARCHAR(32) NOT NULL,
+  `audit_description`  VARCHAR(256),
 
-  PRIMARY KEY (id),
-  FOREIGN KEY (action) REFERENCES dbe.audit_action (id)
+  PRIMARY KEY (`id`),
+  FOREIGN KEY (`action`) REFERENCES `dbee`.`audit_action` (`id`)
     ON DELETE NO ACTION
     ON UPDATE CASCADE
 );
@@ -137,22 +136,22 @@ CREATE TABLE dbe.permission_audit
 # -----------------------------------------------
 # -----------------------------------------------
 
-CREATE TABLE dbe.groups
+CREATE TABLE `dbee`.`group`
 (
-  id           INT AUTO_INCREMENT,
+  `id`           INT AUTO_INCREMENT,
 
-  created_by   INT                NOT NULL,
-  created_date TIMESTAMP          NOT NULL,
-  updated_by   INT                NOT NULL,
-  updated_date TIMESTAMP          NOT NULL,
-  deleted_by   INT,
-  deleted_date TIMESTAMP,
+  `created_by`   INT                NOT NULL,
+  `created_date` TIMESTAMP          NOT NULL,
+  `updated_by`   INT                NOT NULL,
+  `updated_date` TIMESTAMP          NOT NULL,
+  `deleted_by`   INT,
+  `deleted_date` TIMESTAMP,
 
-  name         VARCHAR(64) UNIQUE NOT NULL,
-  parent_group INT,
+  `name`         VARCHAR(64) UNIQUE NOT NULL,
+  `parent_group` INT,
 
-  PRIMARY KEY (id),
-  FOREIGN KEY (parent_group) REFERENCES dbe.groups (id)
+  PRIMARY KEY (`id`),
+  FOREIGN KEY (`parent_group`) REFERENCES `dbee`.`group` (`id`)
     ON DELETE NO ACTION
     ON UPDATE CASCADE
 );
@@ -160,24 +159,24 @@ CREATE TABLE dbe.groups
 # -----------------------------------------------
 # -----------------------------------------------
 
-CREATE TABLE dbe.groups_audit
+CREATE TABLE `dbee`.`group_audit`
 (
-  id                 INT AUTO_INCREMENT,
-  action             INT         NOT NULL,
+  `id`                 INT AUTO_INCREMENT,
+  `action`             INT         NOT NULL,
 
-  audit_id           INT         NOT NULL,
-  audit_created_by   INT         NOT NULL,
-  audit_created_date TIMESTAMP   NOT NULL,
-  audit_updated_by   INT         NOT NULL,
-  audit_updated_date TIMESTAMP   NOT NULL,
-  audit_deleted_by   INT,
-  audit_deleted_date TIMESTAMP,
+  `audit_id`           INT         NOT NULL,
+  `audit_created_by`   INT         NOT NULL,
+  `audit_created_date` TIMESTAMP   NOT NULL,
+  `audit_updated_by`   INT         NOT NULL,
+  `audit_updated_date` TIMESTAMP   NOT NULL,
+  `audit_deleted_by`   INT,
+  `audit_deleted_date` TIMESTAMP,
 
-  audit_name         VARCHAR(64) NOT NULL,
-  audit_parent_group INT,
+  `audit_name`         VARCHAR(64) NOT NULL,
+  `audit_parent_group` INT,
 
-  PRIMARY KEY (id),
-  FOREIGN KEY (action) REFERENCES dbe.audit_action (id)
+  PRIMARY KEY (`id`),
+  FOREIGN KEY (`action`) REFERENCES `dbee`.`audit_action` (`id`)
     ON DELETE NO ACTION
     ON UPDATE CASCADE
 );
@@ -185,76 +184,25 @@ CREATE TABLE dbe.groups_audit
 # -----------------------------------------------
 # -----------------------------------------------
 
-CREATE TABLE dbe.groups_permission
+CREATE TABLE `dbee`.`group_permission`
 (
-  id               INT AUTO_INCREMENT,
+  `id`               INT AUTO_INCREMENT,
 
-  created_by       INT       NOT NULL,
-  created_date     TIMESTAMP NOT NULL,
-  updated_by       INT       NOT NULL,
-  updated_date     TIMESTAMP NOT NULL,
-  deleted_by       INT,
-  deleted_date     TIMESTAMP,
+  `created_by`       INT       NOT NULL,
+  `created_date`     TIMESTAMP NOT NULL,
+  `updated_by`       INT       NOT NULL,
+  `updated_date`     TIMESTAMP NOT NULL,
+  `deleted_by`       INT,
+  `deleted_date`     TIMESTAMP,
 
-  permission       INT       NOT NULL,
-  permission_group INT       NOT NULL,
+  `permission`       INT       NOT NULL,
+  `group` INT       NOT NULL,
 
-  PRIMARY KEY (id),
-  FOREIGN KEY (permission) REFERENCES dbe.permission (id)
+  PRIMARY KEY (`id`),
+  FOREIGN KEY (`permission`) REFERENCES `dbee`.`permission` (`id`)
     ON DELETE CASCADE
     ON UPDATE CASCADE,
-  FOREIGN KEY (permission_group) REFERENCES dbe.groups (id)
-    ON DELETE CASCADE
-    ON UPDATE CASCADE
-);
-
-# -----------------------------------------------
-# -----------------------------------------------
-
-CREATE TABLE dbe.groups_permission_audit
-(
-  id                     INT AUTO_INCREMENT,
-  action                 INT       NOT NULL,
-
-  audit_id               INT       NOT NULL,
-  audit_created_by       INT       NOT NULL,
-  audit_created_date     TIMESTAMP NOT NULL,
-  audit_updated_by       INT       NOT NULL,
-  audit_updated_date     TIMESTAMP NOT NULL,
-  audit_deleted_by       INT,
-  audit_deleted_date     TIMESTAMP,
-
-  audit_permission       INT       NOT NULL,
-  audit_permission_group INT       NOT NULL,
-
-  PRIMARY KEY (id),
-  FOREIGN KEY (action) REFERENCES dbe.audit_action (id)
-    ON DELETE NO ACTION
-    ON UPDATE CASCADE
-);
-
-# -----------------------------------------------
-# -----------------------------------------------
-
-CREATE TABLE dbe.users_groups
-(
-  id           INT AUTO_INCREMENT,
-
-  created_by   INT       NOT NULL,
-  created_date TIMESTAMP NOT NULL,
-  updated_by   INT       NOT NULL,
-  updated_date TIMESTAMP NOT NULL,
-  deleted_by   INT,
-  deleted_date TIMESTAMP,
-
-  users        INT       NOT NULL,
-  user_group   INT       NOT NULL,
-
-  PRIMARY KEY (id),
-  FOREIGN KEY (users) REFERENCES dbe.users (id)
-    ON DELETE CASCADE
-    ON UPDATE CASCADE,
-  FOREIGN KEY (user_group) REFERENCES dbe.groups (id)
+  FOREIGN KEY (`group`) REFERENCES `dbee`.`group` (`id`)
     ON DELETE CASCADE
     ON UPDATE CASCADE
 );
@@ -262,24 +210,24 @@ CREATE TABLE dbe.users_groups
 # -----------------------------------------------
 # -----------------------------------------------
 
-CREATE TABLE dbe.users_groups_audit
+CREATE TABLE `dbee`.`group_permission_audit`
 (
-  id                 INT AUTO_INCREMENT,
-  action             INT       NOT NULL,
+  `id`                     INT AUTO_INCREMENT,
+  `action`                 INT       NOT NULL,
 
-  audit_id           INT       NOT NULL,
-  audit_created_by   INT       NOT NULL,
-  audit_created_date TIMESTAMP NOT NULL,
-  audit_updated_by   INT       NOT NULL,
-  audit_updated_date TIMESTAMP NOT NULL,
-  audit_deleted_by   INT,
-  audit_deleted_date TIMESTAMP,
+  `audit_id`               INT       NOT NULL,
+  `audit_created_by`       INT       NOT NULL,
+  `audit_created_date`     TIMESTAMP NOT NULL,
+  `audit_updated_by`       INT       NOT NULL,
+  `audit_updated_date`     TIMESTAMP NOT NULL,
+  `audit_deleted_by`       INT,
+  `audit_deleted_date`     TIMESTAMP,
 
-  audit_users        INT       NOT NULL,
-  audit_user_group   INT       NOT NULL,
+  `audit_permission`       INT       NOT NULL,
+  `audit_group` INT       NOT NULL,
 
-  PRIMARY KEY (id),
-  FOREIGN KEY (action) REFERENCES dbe.audit_action (id)
+  PRIMARY KEY (`id`),
+  FOREIGN KEY (`action`) REFERENCES `dbee`.`audit_action` (`id`)
     ON DELETE NO ACTION
     ON UPDATE CASCADE
 );
@@ -287,31 +235,46 @@ CREATE TABLE dbe.users_groups_audit
 # -----------------------------------------------
 # -----------------------------------------------
 
-CREATE TABLE dbe.record (
-  id           INT AUTO_INCREMENT,
+CREATE TABLE `dbee`.`user_group` (
+  `id`           INT AUTO_INCREMENT,
 
-  created_by   INT          NOT NULL,
-  created_date TIMESTAMP    NOT NULL,
-  updated_by   INT          NOT NULL,
-  updated_date TIMESTAMP    NOT NULL,
-  deleted_by   INT,
-  deleted_date TIMESTAMP,
+  `created_by`   INT       NOT NULL,
+  `created_date` TIMESTAMP NOT NULL,
+  `updated_by`   INT       NOT NULL,
+  `updated_date` TIMESTAMP NOT NULL,
+  `deleted_by`   INT,
+  `deleted_date` TIMESTAMP,
 
-  firstname    VARCHAR(64)  NOT NULL,
-  lastname     VARCHAR(64)  NOT NULL,
-  born_date    DATE         NOT NULL,
-  address      VARCHAR(128) NOT NULL,
-  email        VARCHAR(128) NOT NULL,
-  phone        VARCHAR(30)  NOT NULL,
+  `user`        INT       NOT NULL,
+  `group` INT NOT NULL,
 
-  PRIMARY KEY (id),
-  FOREIGN KEY (created_by) REFERENCES dbe.users (id)
-    ON DELETE NO ACTION
-    ON UPDATE CASCADE,
-  FOREIGN KEY (updated_by) REFERENCES dbe.users (id)
-    ON DELETE NO ACTION
-    ON UPDATE CASCADE,
-  FOREIGN KEY (deleted_by) REFERENCES dbe.users (id)
+  PRIMARY KEY (`id`),
+  FOREIGN KEY (`group`) REFERENCES `dbee`.`group`(`id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  FOREIGN KEY (`user`) REFERENCES `dbee`.`user`(`id`) ON DELETE CASCADE ON UPDATE CASCADE
+);
+-- FOREIGN KEY REFERENCES `dbee`.group(`id`) ON DELETE CASCADE ON UPDATE CASCADE,
+-- FOREIGN KEY REFERENCES `dbee`.`user`(`id`) ON DELETE CASCADE ON UPDATE CASCADE,
+# -----------------------------------------------
+# -----------------------------------------------
+
+CREATE TABLE `dbee`.`user_group_audit`
+(
+  `id`                 INT AUTO_INCREMENT,
+  `action`             INT       NOT NULL,
+
+  `audit_id`           INT       NOT NULL,
+  `audit_created_by`   INT       NOT NULL,
+  `audit_created_date` TIMESTAMP NOT NULL,
+  `audit_updated_by`   INT       NOT NULL,
+  `audit_updated_date` TIMESTAMP NOT NULL,
+  `audit_deleted_by`   INT,
+  `audit_deleted_date` TIMESTAMP,
+
+  `audit_user`        INT       NOT NULL,
+  `audit_group`   INT       NOT NULL,
+
+  PRIMARY KEY (`id`),
+  FOREIGN KEY (`action`) REFERENCES `dbee`.`audit_action` (`id`)
     ON DELETE NO ACTION
     ON UPDATE CASCADE
 );
@@ -319,27 +282,59 @@ CREATE TABLE dbe.record (
 # -----------------------------------------------
 # -----------------------------------------------
 
-CREATE TABLE dbe.record_audit (
-  id                 INT AUTO_INCREMENT,
-  action             INT          NOT NULL,
+CREATE TABLE `dbee`.`record` (
+  `id`           INT AUTO_INCREMENT,
 
-  audit_id           INT          NOT NULL,
-  audit_created_by   INT          NOT NULL,
-  audit_created_date TIMESTAMP    NOT NULL,
-  audit_updated_by   INT          NOT NULL,
-  audit_updated_date TIMESTAMP    NOT NULL,
-  audit_deleted_by   INT          ,
-  audit_deleted_date INT          ,
+  `created_by`   INT          NOT NULL,
+  `created_date` TIMESTAMP    NOT NULL,
+  `updated_by`   INT          NOT NULL,
+  `updated_date` TIMESTAMP    NOT NULL,
+  `deleted_by`   INT,
+  `deleted_date` TIMESTAMP,
 
-  audit_firstname    VARCHAR(64)  NOT NULL,
-  audit_lastname     VARCHAR(64)  NOT NULL,
-  audit_born_date    DATE         NOT NULL,
-  audit_address      VARCHAR(128) NOT NULL,
-  audit_email        VARCHAR(128) NOT NULL,
-  audit_phone        VARCHAR(30)  NOT NULL,
+  `firstname`    VARCHAR(64)  NOT NULL,
+  `lastname`     VARCHAR(64)  NOT NULL,
+  `born_date`    DATE         NOT NULL,
+  `address`      VARCHAR(128) NOT NULL,
+  `email`        VARCHAR(128) NOT NULL,
+  `phone`        VARCHAR(30)  NOT NULL,
 
-  PRIMARY KEY (id),
-  FOREIGN KEY (action) REFERENCES dbe.audit_action (id)
+  PRIMARY KEY (`id`),
+  FOREIGN KEY (`created_by`) REFERENCES `dbee`.`user` (`id`)
+    ON DELETE NO ACTION
+    ON UPDATE CASCADE,
+  FOREIGN KEY (`updated_by`) REFERENCES `dbee`.`user` (`id`)
+    ON DELETE NO ACTION
+    ON UPDATE CASCADE,
+  FOREIGN KEY (`deleted_by`) REFERENCES `dbee`.`user` (`id`)
+    ON DELETE NO ACTION
+    ON UPDATE CASCADE
+);
+
+# -----------------------------------------------
+# -----------------------------------------------
+
+CREATE TABLE `dbee`.`record_audit` (
+  `id`                 INT AUTO_INCREMENT,
+  `action`             INT          NOT NULL,
+
+  `audit_id`           INT          NOT NULL,
+  `audit_created_by`   INT          NOT NULL,
+  `audit_created_date` TIMESTAMP    NOT NULL,
+  `audit_updated_by`   INT          NOT NULL,
+  `audit_updated_date` TIMESTAMP    NOT NULL,
+  `audit_deleted_by`   INT          ,
+  `audit_deleted_date` INT          ,
+
+  `audit_firstname`    VARCHAR(64)  NOT NULL,
+  `audit_lastname`     VARCHAR(64)  NOT NULL,
+  `audit_born_date`    DATE         NOT NULL,
+  `audit_address`      VARCHAR(128) NOT NULL,
+  `audit_email`        VARCHAR(128) NOT NULL,
+  `audit_phone`        VARCHAR(30)  NOT NULL,
+
+  PRIMARY KEY (`id`),
+  FOREIGN KEY (`action`) REFERENCES `dbee`.`audit_action` (`id`)
     ON DELETE NO ACTION
     ON UPDATE CASCADE
 );
@@ -350,19 +345,19 @@ CREATE TABLE dbe.record_audit (
 #
 # -----------------------------------------------
 
-INSERT INTO dbe.audit_action (name)
+INSERT INTO `dbee`.`audit_action` (`name`)
 VALUES ('created'),
        ('updated'),
        ('deleted');
 
-INSERT INTO dbe.users (created_by,
-                       created_date,
-                       updated_by,
-                       updated_date,
-                       username,
-                       password,
-                       salt,
-                       firstname,
-                       lastname,
-                       email)
-VALUES (1, NOW(), 1, NOW(), 'db_core', 'pw', 'salt', 'DB', 'CORE', 'core@db');
+INSERT INTO `dbee`.`user` (`created_by`,
+                       `created_date`,
+                       `updated_by`,
+                       `updated_date`,
+                       `username`,
+                       `password`,
+                       `salt`,
+                       `firstname`,
+                       `lastname`,
+                       `email`)
+VALUES (1, NOW(), 1, NOW(), 'db_core', 'pw', '`salt`', 'DB', 'CORE', 'core@db');
