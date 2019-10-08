@@ -1,16 +1,16 @@
 DELIMITER //
 
-CREATE TRIGGER `dbee`.`insert_user_audit`
+CREATE TRIGGER `dbe`.`insert_user_audit`
   AFTER INSERT
-  ON `dbee`.`user`
+  ON `dbe`.`user`
   FOR EACH ROW
   BEGIN
     DECLARE `v_action` INT;
 
-    SELECT `id` FROM `dbee`.`audit_action` WHERE `audit_action`.`name` = 'created'
+    SELECT `id` FROM `dbe`.`audit_action` WHERE `audit_action`.`name` = 'created'
         INTO `v_action`;
 
-    INSERT INTO `dbee`.`user_audit` (`action`,
+    INSERT INTO `dbe`.`user_audit` (`action`,
                                  `audit_id`,
                                  `audit_created_by`,
                                  `audit_created_date`,
@@ -43,17 +43,17 @@ CREATE TRIGGER `dbee`.`insert_user_audit`
 
 DELIMITER //
 
-CREATE TRIGGER `dbee`.`update_user_audit`
+CREATE TRIGGER `dbe`.`update_user_audit`
   AFTER UPDATE
-  ON `dbee`.`user`
+  ON `dbe`.`user`
   FOR EACH ROW
   BEGIN
     DECLARE `v_action` INT;
 
-    SELECT `id` FROM `dbee`.`audit_action` WHERE `audit_action`.`name` = 'updated'
+    SELECT `id` FROM `dbe`.`audit_action` WHERE `audit_action`.`name` = 'updated'
         INTO `v_action`;
 
-    INSERT INTO `dbee`.`user_audit` (`action`,
+    INSERT INTO `dbe`.`user_audit` (`action`,
                                  `audit_id`,
                                  `audit_created_by`,
                                  `audit_created_date`,
@@ -86,17 +86,17 @@ CREATE TRIGGER `dbee`.`update_user_audit`
 
 DELIMITER //
 
-CREATE TRIGGER `dbee`.`delete_user_audit`
+CREATE TRIGGER `dbe`.`delete_user_audit`
   AFTER DELETE
-  ON `dbee`.`user`
+  ON `dbe`.`user`
   FOR EACH ROW
   BEGIN
     DECLARE `v_action` INT;
 
-    SELECT `id` FROM `dbee`.`audit_action` WHERE `audit_action`.`name` = 'deleted'
+    SELECT `id` FROM `dbe`.`audit_action` WHERE `audit_action`.`name` = 'deleted'
         INTO `v_action`;
 
-    INSERT INTO `dbee`.`user_audit` (`action`,
+    INSERT INTO `dbe`.`user_audit` (`action`,
                                  `audit_id`,
                                  `audit_created_by`,
                                  `audit_created_date`,

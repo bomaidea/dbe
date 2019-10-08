@@ -1,16 +1,16 @@
 DELIMITER //
 
-CREATE TRIGGER `dbee`.`insert_record_audit`
+CREATE TRIGGER `dbe`.`insert_record_audit`
 AFTER INSERT 
-	ON `dbee`.`record` FOR EACH ROW
+	ON `dbe`.`record` FOR EACH ROW
 BEGIN
 	DECLARE `v_action` INT;
 
 	SELECT `id` 
-		FROM `dbee`.`audit_action` 
+		FROM `dbe`.`audit_action` 
 		WHERE `audit_action`.`name`='created' 
 		INTO `v_action`;
-  INSERT INTO `dbee`.`record_audit`(
+  INSERT INTO `dbe`.`record_audit`(
       `action`,
       `audit_id`,
       `audit_created_by`,
@@ -45,17 +45,17 @@ END; //
 
 DELIMITER //
 
-CREATE TRIGGER `dbee`.`update_record_audit`
+CREATE TRIGGER `dbe`.`update_record_audit`
 AFTER UPDATE
-	ON `dbee`.`record` FOR EACH ROW
+	ON `dbe`.`record` FOR EACH ROW
 BEGIN
 	DECLARE `v_action` INT;
 
 	SELECT `id`
-		FROM `dbee`.`audit_action`
+		FROM `dbe`.`audit_action`
 		WHERE `audit_action`.`name`='updated'
 		INTO `v_action`;
-  INSERT INTO `dbee`.`record_audit`(
+  INSERT INTO `dbe`.`record_audit`(
       `action`,
       `audit_id`,
       `audit_created_by`,
@@ -90,17 +90,17 @@ END; //
 
 DELIMITER //
 
-CREATE TRIGGER `dbee`.`delete_record_audit`
+CREATE TRIGGER `dbe`.`delete_record_audit`
 AFTER DELETE
-	ON `dbee`.`record` FOR EACH ROW
+	ON `dbe`.`record` FOR EACH ROW
 BEGIN
 	DECLARE `v_action` INT;
 
 	SELECT `id`
-		FROM `dbee`.`audit_action`
+		FROM `dbe`.`audit_action`
 		WHERE `audit_action`.`name`='deleted'
 		INTO `v_action`;
-  INSERT INTO `dbee`.`record_audit`(
+  INSERT INTO `dbe`.`record_audit`(
       `action`,
       `audit_id`,
       `audit_created_by`,

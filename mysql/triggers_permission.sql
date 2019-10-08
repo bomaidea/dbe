@@ -1,16 +1,16 @@
 DELIMITER //
 
-CREATE TRIGGER `dbee`.`insert_permission_audit`
+CREATE TRIGGER `dbe`.`insert_permission_audit`
   AFTER INSERT
-  ON `dbee`.`permission`
+  ON `dbe`.`permission`
   FOR EACH ROW
   BEGIN
     DECLARE `v_action` INT;
 
-    SELECT `id` FROM `dbee`.`audit_action` WHERE `audit_action`.`name` = 'created'
+    SELECT `id` FROM `dbe`.`audit_action` WHERE `audit_action`.`name` = 'created'
         INTO `v_action`;
 
-    INSERT INTO `dbee`.`permission_audit` (`action`,
+    INSERT INTO `dbe`.`permission_audit` (`action`,
                                       `audit_id`,
                                       `audit_created_by`,
                                       `audit_created_date`,
@@ -37,17 +37,17 @@ CREATE TRIGGER `dbee`.`insert_permission_audit`
 
 DELIMITER //
 
-CREATE TRIGGER `dbee`.`update_permission_audit`
+CREATE TRIGGER `dbe`.`update_permission_audit`
   AFTER UPDATE
-  ON `dbee`.`permission`
+  ON `dbe`.`permission`
   FOR EACH ROW
   BEGIN
     DECLARE `v_action` INT;
 
-    SELECT `id` FROM `dbee`.`audit_action` WHERE `audit_action`.`name` = 'updated'
+    SELECT `id` FROM `dbe`.`audit_action` WHERE `audit_action`.`name` = 'updated'
         INTO `v_action`;
 
-    INSERT INTO `dbee`.`permission_audit` (`action`,
+    INSERT INTO `dbe`.`permission_audit` (`action`,
                                       `audit_id`,
                                       `audit_created_by`,
                                       `audit_created_date`,
@@ -74,17 +74,17 @@ CREATE TRIGGER `dbee`.`update_permission_audit`
 
 DELIMITER //
 
-CREATE TRIGGER `dbee`.`delete_permission_audit`
+CREATE TRIGGER `dbe`.`delete_permission_audit`
   AFTER DELETE
-  ON `dbee`.`permission`
+  ON `dbe`.`permission`
   FOR EACH ROW
   BEGIN
     DECLARE `v_action` INT;
 
-    SELECT `id` FROM `dbee`.`audit_action` WHERE `audit_action`.`name` = 'deleted'
+    SELECT `id` FROM `dbe`.`audit_action` WHERE `audit_action`.`name` = 'deleted'
         INTO `v_action`;
 
-    INSERT INTO `dbee`.`permission_audit` (`action`,
+    INSERT INTO `dbe`.`permission_audit` (`action`,
                                       `audit_id`,
                                       `audit_created_by`,
                                       `audit_created_date`,
