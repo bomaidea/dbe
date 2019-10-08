@@ -252,8 +252,7 @@ CREATE TABLE `dbee`.`user_group` (
   FOREIGN KEY (`group`) REFERENCES `dbee`.`group`(`id`) ON DELETE CASCADE ON UPDATE CASCADE,
   FOREIGN KEY (`user`) REFERENCES `dbee`.`user`(`id`) ON DELETE CASCADE ON UPDATE CASCADE
 );
--- FOREIGN KEY REFERENCES `dbee`.group(`id`) ON DELETE CASCADE ON UPDATE CASCADE,
--- FOREIGN KEY REFERENCES `dbee`.`user`(`id`) ON DELETE CASCADE ON UPDATE CASCADE,
+
 # -----------------------------------------------
 # -----------------------------------------------
 
